@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unified Mentor Dashboards Showcase</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    /* --- Modern 3D style variables --- */
+    :root {
+      --surface: rgba(255,255,255,0.08);
+      --surface-strong: rgba(255,255,255,0.12);
+      --text: #e9eefb;
+      --muted: #a8b2c8;
+      --primary: #7aa2ff;
+      --secondary: #59e1a9;
+      --accent: #ff7ad9;
+      --radius: 18px;
+      --shadow-1: 0 10px 30px rgba(0,0,0,0.35);
+      --shadow-2: 0 30px 60px rgba(0,0,0,0.45);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+    }
+
+    .header-wrapper {
+      text-align: center;
+      margin-top: 40px;
+      filter: drop-shadow(0 0 6px #fb2803);
+    }
+
+    .header-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00e0ff, #7873f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    .header-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: #ffffff;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card {
+      background: linear-gradient(180deg,var(--surface),var(--surface-strong));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      padding: 20px;
+      transition: transform 0.6s, box-shadow 0.6s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: rotateX(3deg) rotateY(-3deg) translateZ(18px);
+      box-shadow: var(--shadow-2);
+      filter: drop-shadow(0 0 6px #42ff55);
+    }
+
+    .card-title {
+      margin-bottom: 12px;
+      font-weight: 600;
+      filter: drop-shadow(0 0 6px #fefa00);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .btn {
+      margin: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: #0b0f17;
+    }
+
+    .btn-primary { background: var(--primary); filter: drop-shadow(0 0 6px #f41fdf);}
+    .btn-secondary { background: var(--secondary); filter: drop-shadow(0 0 6px #fe2600);}
+  </style>
+</head>
+<body>
+  <div class="header-wrapper">
+    <h1 class="header-title">Unified Mentor Dashboards Showcase</h1>
+    <p class="header-subtitle">Machine Learning Internship Projects by Prathamesh Bhurke</p>
+  </div>
+
+  <div class="cards">
+    <!-- UK Music Dashboard -->
+    <div class="card">
+      <h2 class="card-title">UK Music Market Dashboard</h2>
+      <img src="uk_dashboard.png" alt="UK Music Dashboard Screenshot">
+      <p>Interactive analytics of the UK music industry — explore artist diversity, genre trends, and streaming insights.</p>
+      <a href="https://um-unitedkingdommusicmarketanalysisdashboard.streamlit.app/" 
+         target="_blank" class="btn btn-primary">Open UK Dashboard</a>
+      <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7462219538391003137" 
+         target="_blank" class="btn btn-secondary">View LinkedIn Post</a>
+    </div>
+
+    <!-- US Care-Load Dashboard -->
+    <div class="card">
+      <h2 class="card-title">US CBP–HHS Care-Load Dashboard</h2>
+      <img src="us_dashboard.png" alt="US Care-Load Dashboard Screenshot">
+      <p>Custody-to-care analytics for CBP–HHS operations — monitor system load, inflow velocity, and forecast alerts.</p>
+      <a href="https://um-ussystemcapacitycareloadanalyticsforunaccompaniedchildren.streamlit.app/" 
+         target="_blank" class="btn btn-primary">Open US Dashboard</a>
+      <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7474805161413165056" 
+         target="_blank" class="btn btn-secondary">View LinkedIn Post</a>
+    </div>
+  </div>
+</body>
+</html>
