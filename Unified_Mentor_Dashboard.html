@@ -112,6 +112,55 @@
     .btn-secondary { background: var(--secondary); filter: drop-shadow(0 0 6px #fe2600);}
     .btn-linkedin { background: #0077b5; color: #fff; filter: drop-shadow(0 0 6px #00c3ff);}
     
+    /* Glass theme modal */
+    .custom-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .custom-modal-content {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden; /* no scrollbars */
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      text-shadow: 0 0 12px #ff4444;
+    }
+    
+    .close-btn:hover {
+      color: #ff0000;
+    }
+    
+    #zoomedImage {
+      display: block;
+      transform-origin: center;
+      transform: scale(1) translate(0px, 0px);
+      transition: transform 0.2s ease;
+      cursor: grab;
+    }
+    #zoomedImage:active {
+      cursor: grabbing;
+    }
+
     .footer {
       text-align: center;
       margin: 40px 0;
@@ -187,6 +236,122 @@
     </div>
   </div>
 
+  <!-- Modal for zoomed previews -->
+  <div id="imageModal" class="custom-modal" onclick="outsideClick(event)">
+    <div class="custom-modal-content" onclick="event.stopPropagation()">
+      <div class="custom-modal-header">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="custom-modal-body">
+        <img id="zoomedImage" src="" alt="Zoomed Proof">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Credentials Section -->
+  <div class="cards">
+    <!-- Offer Letter -->
+    <div class="card">
+      <h2 class="card-title">Internship Offer Letter</h2>
+      <img src="OfferLetter.png" alt="Offer Letter Screenshot" onclick="openModal('OfferLetter.png')">
+      <p>Official internship offer confirming my role at Unified Mentor Private Limited.</p>
+      <center>
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7446140512912334849?collapsed=1" 
+                height="506" width="90%" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+      </center>
+    </div>
+  
+    <!-- Experience Letter (LOR) -->
+    <div class="card">
+      <h2 class="card-title">Experience Letter (LOR)</h2>
+      <img src="LOR.png" alt="Experience Letter Screenshot" onclick="openModal('LOR.png')">
+      <p>Letter of Recommendation highlighting my contributions during the internship.</p>
+      <a href="https://www.linkedin.com/in/prathamesh-bhurke-b52b07247/overlay/Position/2967091946/treasury/?profileId=ACoAAD016a4BgtEygbfE84lLN5irfsBAi0Oed9k"
+        target="_blank" class="btn btn-primary">View LOR</a>
+    </div>
+  
+    <!-- Completion Certificate -->
+    <div class="card">
+      <h2 class="card-title">Internship Completion Certificate</h2>
+      <img src="certificate.png" alt="Completion Certificate Screenshot" onclick="openModal('certificate.png')">
+      <p>Verified certificate of successful completion of my Machine Learning Internship.</p>
+      <a href="https://unifiedmentor.com/verify-certificate/UMID03042687228" 
+          target="_blank" class="btn btn-primary">Verify Certificate</a>
+    </div>
+  </div>
+  
+  <script>
+    // Ensure modal is hidden on reload
+  window.onload = function() {
+    document.getElementById("imageModal").style.display = "none";
+    document.getElementById("zoomedImage").src = ""; // clear any leftover image
+  };
+  let scale = 1;
+  let translateX = 0;
+  let translateY = 0;
+  let isDragging = false;
+  let startX, startY;
+  
+  function openModal(imgSrc) {
+    const modal = document.getElementById("imageModal");
+    modal.style.display = "flex"; // inline flex ensures it opens
+    const zoomedImage = document.getElementById("zoomedImage");
+    zoomedImage.src = imgSrc;
+    scale = 1; translateX = 0; translateY = 0;
+    updateTransform();
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById("imageModal");
+    modal.style.display = "none"; // hide again
+    document.getElementById("zoomedImage").src = "";
+  }
+  
+  function outsideClick(event) {
+    const modal = document.getElementById("imageModal");
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+  
+  function updateTransform() {
+    const zoomedImage = document.getElementById("zoomedImage");
+    zoomedImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+  }
+  
+  // Zoom with mouse wheel
+  document.getElementById("zoomedImage").addEventListener("wheel", function(e) {
+    e.preventDefault();
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(0.5, scale), 4);
+    updateTransform();
+  });
+  
+  // Drag-to-pan
+  const zoomedImage = document.getElementById("zoomedImage");
+  
+  zoomedImage.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+  });
+  
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+  
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    translateX += (e.clientX - startX) / scale;
+    translateY += (e.clientY - startY) / scale;
+    startX = e.clientX;
+    startY = e.clientY;
+    updateTransform();
+  });
+  
+  </script>
+  
   <!-- Footer with LinkedIn Company Profile -->
   <div class="footer">
     <p>Created during my internship at Unified Mentor Private Limited</p>
