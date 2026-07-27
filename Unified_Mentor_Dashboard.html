@@ -122,6 +122,7 @@
       -webkit-backdrop-filter: blur(12px);
       justify-content: center;
       align-items: center;
+      max-height: fit-content;
     }
     
     .custom-modal-content {
@@ -133,7 +134,9 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.45);
       position: relative;
       overflow: hidden; /* no scrollbars */
-      max-height: fit-content;
+      justify-content: center;
+      align-items: center;
+      margin-top: 8%;
     }
     
     .close-btn {
@@ -165,6 +168,13 @@
     .footer {
       text-align: center;
       margin: 40px 0;
+    }
+
+    /* Mobile view: stack vertically with scroll */
+    @media (max-width: 100%) {
+      .modal-grid {
+        grid-template-columns: 1fr; /* single column */
+      }
     }
   </style>
 </head>
@@ -267,7 +277,7 @@
       <h2 class="card-title">Experience Letter (LOR)</h2>
       <img src="LOR.png" alt="Experience Letter Screenshot" onclick="openModal('LOR.png')">
       <p>Letter of Recommendation highlighting my contributions during the internship.</p>
-      <a href="https://www.linkedin.com/in/prathamesh-bhurke-b52b07247/overlay/Position/2967091946/treasury/?profileId=ACoAAD016a4BgtEygbfE84lLN5irfsBAi0Oed9k"
+      <a href="https://media.licdn.com/dms/image/v2/D4D2DAQGMHNhKk6CQzQ/profile-treasury-image-shrink_800_800/B4DZ9vvS.QKYAM-/0/1784286097539?e=1785776400&v=beta&t=MgsP0mWMQxjqu-wtFrm-PzFKS97eLQSYfLgCSBl_zDE"
         target="_blank" class="btn btn-primary">View LOR</a>
     </div>
   
