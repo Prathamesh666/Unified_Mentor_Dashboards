@@ -85,6 +85,12 @@
       filter: drop-shadow(0 0 6px #fefa00);
     }
 
+    .card-title1 {
+      margin-bottom: 12px;
+      font-weight: 600;
+      filter: drop-shadow(0 0 6px #00fe2a);
+    }
+
     .card img {
       width: 100%;
       border-radius: 12px;
@@ -132,9 +138,9 @@
         target="_blank" class="btn btn-secondary">View LinkedIn Post</a>
       <div class="card-embeds">
         <hr>
-        <h3 class="header-title">Products</h3>
+        <h3 class="card-title">Products</h3>
         <br>
-        <h4 class="card-title">Spotify Playlist Preview 🎵</h4>
+        <h4 class="card-title1">Spotify Playlist Preview 🎵</h4>
         
         <!-- Spotify Playlist Embed -->
         <iframe data-testid="embed-iframe" 
@@ -147,24 +153,25 @@
         <p class="playlist-info">
           🎧 <strong>Spotify version:</strong> ~779 songs • 45 hr 38 min of UK music insights
         </p>
-      
-        <!-- YouTube Playlist Button -->
-        <a href="https://youtube.com/playlist?list=PLCvr4P68U0Ps&si=Tsp0dkDW_Z0vElWq" 
-          target="_blank" class="btn btn-danger">
-          ▶ Watch YouTube Playlist
-        </a>
+        <br>
+        
+        <h4 class="card-title1">YouTube Playlist Preview 🎵</h4>
       
         <!-- YouTube Playlist Embed -->
-        <iframe width="100%" height="315" 
-                src="https://www.youtube-nocookie.com/embed/videoseries?list=PLCvr4P68U0Ps" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
+        <iframe width="100%" height="315" style="border-radius:12px" 
+          src="https://www.youtube-nocookie.com/embed/videoseries?si=Tsp0dkDW_Z0vElWq&amp;list=PLCvr4P68U0Ps" 
+          title="YouTube video player" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>
         <p class="playlist-info">
           📺 <strong>YouTube version:</strong> ~767 video tracks • cinematic UK music experience
         </p>
+        <!-- YouTube Playlist Button -->
+        <a href="https://youtube.com/playlist?list=PLCvr4P68U0Ps&si=Tsp0dkDW_Z0vElWq" 
+          target="_blank" class="btn btn-danger">
+          🎬 Watch YouTube Playlist
+        </a>
       </div>
     </div>
 
