@@ -143,6 +143,166 @@
       align-items: center;
       margin-top: 8%;
     }
+
+    /* ===== Internship Timeline Dashboard ===== */
+    .timeline-card{
+      overflow:hidden;
+    }
+    
+    .timeline-dashboard{
+      display:flex;
+      gap:25px;
+      margin-top:25px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    
+    .month-card{
+      flex:1;
+      min-width:320px;
+      background:rgba(255,255,255,0.06);
+      border-radius:18px;
+      padding:18px;
+      position:relative;
+      transition:.5s ease;
+      animation:floatingCard 5s ease-in-out infinite;
+    }
+    
+    .month-card:nth-child(2){
+      animation-delay:.8s;
+    }
+    
+    .month-card:nth-child(3){
+      animation-delay:1.6s;
+    }
+    
+    .month-card:hover{
+      transform:translateY(-10px);
+      box-shadow:var(--shadow-2);
+    }
+    
+    .month-header{
+      text-align:center;
+      font-size:1.25rem;
+      font-weight:700;
+    
+      margin-bottom:20px;
+    
+      padding:14px;
+    
+      border-radius:12px;
+    
+      color:white;
+    }
+    
+    .month-header span{
+      display:block;
+      margin-top:6px;
+      font-size:.85rem;
+    }
+    
+    .month-one{
+      background:linear-gradient(90deg,#00c6ff,#0072ff);
+    }
+    
+    .month-two{
+      background:linear-gradient(90deg,#00ff9d,#00c853);
+    }
+    
+    .month-three{
+      background:linear-gradient(90deg,#ff7a18,#ff4081);
+    }
+    
+    .week-block{
+      background:rgba(255,255,255,0.08);
+      border-left:4px solid var(--primary);
+      border-radius:12px;
+      padding:12px 12px 12px 48px;
+      margin-bottom:12px;
+      text-align:left;
+      position:relative;
+      transition:.3s ease;
+    }
+    
+    .week-block:hover{
+      transform:translateX(8px);
+      filter:drop-shadow(0 0 6px #ff5e42);
+    }
+    
+    .week-block span{
+      position:absolute;
+      left:10px;
+      top:50%;
+      transform:translateY(-50%);
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--primary);
+      color:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:700;
+    }
+    
+    .project{
+      border-left:4px solid var(--secondary);
+    }
+    
+    .project span{
+      background:var(--secondary);
+    }
+    
+    .timeline-stats{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-top:25px;
+    }
+    
+    .stat-box{
+      width:140px;
+      background:rgba(255,255,255,0.08);
+      border-radius:15px;
+      padding:15px;
+      transition:.4s ease;
+    }
+    
+    .stat-box:hover{
+      transform:scale(1.08);
+      filter:drop-shadow(0 0 8px #ff0000);
+    }
+    
+    .stat-box h3{
+      margin:0;
+      color:#e5ff00;
+    }
+    
+    .stat-box p{
+      margin:4px 0 0 0;
+    }
+    
+    @keyframes floatingCard{
+    
+      0%,100%{
+        transform:translateY(0px);
+      }
+    
+      50%{
+        transform:translateY(-12px);
+      }
+    
+    }
+    
+    @media(max-width:1200px){
+    
+      .month-card{
+        min-width:100%;
+      }
+    
+    }
     
     .close-btn {
       position: absolute;
@@ -190,6 +350,177 @@
     <h1 class="header-title">Unified Mentor Dashboards Showcase</h1>
     <p class="header-subtitle">Machine Learning Internship Projects by Prathamesh Bhurke</p>
     <p class="header-subtitle">From CS Department (2026-27), KC College, HSNC University Roll No: 26KCTYCS07</p>
+  </div>
+
+  <!-- Internship Timeline Dashboard -->
+  <div class="cards">
+  
+    <div class="card timeline-card">
+  
+      <h2 class="card-title">
+        🚀 Machine Learning Internship Journey
+      </h2>
+  
+      <p>
+        A structured 12-week roadmap completed during my Machine Learning Internship
+        at Unified Mentor Private Limited (April - July 2026).
+      </p>
+  
+      <div class="timeline-dashboard">
+  
+        <!-- Month 1 -->
+        <div class="month-card">
+  
+          <div class="month-header month-one">
+            📚 Month 1
+            <span>Weeks 1 - 4 • ML Foundations</span>
+          </div>
+  
+          <div class="week-block">
+            <span>W1</span>
+            Introduction to ML, Supervised & Unsupervised Learning,
+            Linear Regression, Vectors & Matrices
+          </div>
+  
+          <div class="week-block">
+            <span>W2</span>
+            Cost Function, Gradient Descent, Learning Rate,
+            Multivariate Regression
+          </div>
+  
+          <div class="week-block">
+            <span>W3</span>
+            Logistic Regression, Decision Boundaries,
+            Multiclass Classification
+          </div>
+  
+          <div class="week-block">
+            <span>W4</span>
+            Underfitting vs Overfitting,
+            Regularization, Bias & Variance,
+            Error Analysis
+          </div>
+  
+        </div>
+  
+        <!-- Month 2 -->
+        <div class="month-card">
+  
+          <div class="month-header month-two">
+            🧠 Month 2
+            <span>Weeks 5 - 8 • Deep Learning</span>
+          </div>
+  
+          <div class="week-block">
+            <span>W5</span>
+            Neural Networks,
+            Learning Process,
+            Classification,
+            Network Weights
+          </div>
+  
+          <div class="week-block">
+            <span>W6</span>
+            TensorFlow,
+            Activation Functions,
+            Simple Neural Networks,
+            CNN Concepts
+          </div>
+  
+          <div class="week-block">
+            <span>W7</span>
+            Decision Trees,
+            Feature Handling,
+            Random Forest,
+            XGBoost
+          </div>
+  
+          <div class="week-block">
+            <span>W8</span>
+            K-Means Clustering,
+            Cluster Analysis,
+            Anomaly Detection,
+            Metrics
+          </div>
+  
+        </div>
+  
+        <!-- Month 3 -->
+        <div class="month-card">
+  
+          <div class="month-header month-three">
+            🏆 Month 3
+            <span>Weeks 9 - 12 • Industry Projects</span>
+          </div>
+  
+          <div class="week-block project">
+            <span>W9</span>
+            UK Music Market Analysis,
+            EDA,
+            Feature Selection &
+            Dashboard Design
+          </div>
+  
+          <div class="week-block project">
+            <span>W10</span>
+            GitHub Repository,
+            Deployment,
+            Testing,
+            Research Paper Writing
+          </div>
+  
+          <div class="week-block project">
+            <span>W11</span>
+            US Care-Load Analytics,
+            Data Validation,
+            Healthcare Metrics,
+            Recommendations
+          </div>
+  
+          <div class="week-block project">
+            <span>W12</span>
+            Deployment,
+            Testing,
+            Research Writing,
+            Final Submission
+          </div>
+  
+        </div>
+  
+      </div>
+  
+      <hr>
+  
+      <div class="timeline-stats">
+  
+        <div class="stat-box">
+          <h3>12</h3>
+          <p>Weeks</p>
+        </div>
+  
+        <div class="stat-box">
+          <h3>60+</h3>
+          <p>Topics</p>
+        </div>
+  
+        <div class="stat-box">
+          <h3>2</h3>
+          <p>Projects</p>
+        </div>
+  
+        <div class="stat-box">
+          <h3>3</h3>
+          <p>Credentials</p>
+        </div>
+  
+      </div>
+  
+      <p style="margin-top:20px;">
+        ✨ Learning Foundations → Deep Learning → Real-World Analytics Projects
+      </p>
+  
+    </div>
+  
   </div>
 
   <div class="cards">

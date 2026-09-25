@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unified Mentor Dashboards Showcase</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    :root {
+      --surface: rgba(255,255,255,0.08);
+      --surface-strong: rgba(255,255,255,0.12);
+      --text: #e9eefb;
+      --muted: #a8b2c8;
+      --primary: #7aa2ff;
+      --secondary: #59e1a9;
+      --accent: #ff7ad9;
+      --radius: 18px;
+      --shadow-1: 0 10px 30px rgba(0,0,0,0.35);
+      --shadow-2: 0 30px 60px rgba(0,0,0,0.45);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+    }
+
+    .header-wrapper {
+      text-align: center;
+      margin-top: 40px;
+      filter: drop-shadow(0 0 6px #fb2803);
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .header-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00e0ff, #7873f5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    .header-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: #ffffff;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card {
+      background: linear-gradient(180deg,var(--surface),var(--surface-strong));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      padding: 20px;
+      transition: transform 0.6s, box-shadow 0.6s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: rotateX(3deg) rotateY(-3deg) translateZ(18px);
+      box-shadow: var(--shadow-2);
+      filter: drop-shadow(0 0 6px #42ff55);
+    }
+
+    .card-title {
+      margin-bottom: 12px;
+      font-weight: 600;
+      filter: drop-shadow(0 0 6px #fefa00);
+    }
+
+    .card-title1 {
+      margin-bottom: 12px;
+      font-weight: 600;
+      filter: drop-shadow(0 0 6px #00fe2a);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .card iframe {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .btn {
+      margin: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: #0b0f17;
+    }
+
+    .btn-primary { background: var(--primary); filter: drop-shadow(0 0 6px #f41fdf);}
+    .btn-secondary { background: var(--secondary); filter: drop-shadow(0 0 6px #fe2600);}
+    .btn-linkedin { background: #0077b5; color: #fff; filter: drop-shadow(0 0 6px #00c3ff);}
+    
+    /* Glass theme modal */
+    .custom-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      justify-content: center;
+      align-items: center;
+      max-height: fit-content;
+    }
+    
+    .custom-modal-content {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden; /* no scrollbars */
+      justify-content: center;
+      align-items: center;
+      margin-top: 8%;
+    }
+
+    /* ===== Internship Timeline Dashboard ===== */
+    .timeline-card{
+      overflow:hidden;
+    }
+    
+    .timeline-dashboard{
+      display:flex;
+      gap:25px;
+      margin-top:25px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    
+    .month-card{
+      flex:1;
+      min-width:320px;
+      background:rgba(255,255,255,0.06);
+      border-radius:18px;
+      padding:18px;
+      position:relative;
+      transition:.5s ease;
+      animation:floatingCard 5s ease-in-out infinite;
+    }
+    
+    .month-card:nth-child(2){
+      animation-delay:.8s;
+    }
+    
+    .month-card:nth-child(3){
+      animation-delay:1.6s;
+    }
+    
+    .month-card:hover{
+      transform:translateY(-10px);
+      box-shadow:var(--shadow-2);
+    }
+    
+    .month-header{
+      text-align:center;
+      font-size:1.25rem;
+      font-weight:700;
+    
+      margin-bottom:20px;
+    
+      padding:14px;
+    
+      border-radius:12px;
+    
+      color:white;
+    }
+    
+    .month-header span{
+      display:block;
+      margin-top:6px;
+      font-size:.85rem;
+    }
+    
+    .month-one{
+      background:linear-gradient(90deg,#00c6ff,#0072ff);
+    }
+    
+    .month-two{
+      background:linear-gradient(90deg,#00ff9d,#00c853);
+    }
+    
+    .month-three{
+      background:linear-gradient(90deg,#ff7a18,#ff4081);
+    }
+    
+    .week-block{
+      background:rgba(255,255,255,0.08);
+      border-left:4px solid var(--primary);
+      border-radius:12px;
+      padding:12px 12px 12px 48px;
+      margin-bottom:12px;
+      text-align:left;
+      position:relative;
+      transition:.3s ease;
+    }
+    
+    .week-block:hover{
+      transform:translateX(8px);
+      filter:drop-shadow(0 0 6px #ff5e42);
+    }
+    
+    .week-block span{
+      position:absolute;
+      left:10px;
+      top:50%;
+      transform:translateY(-50%);
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--primary);
+      color:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:700;
+    }
+    
+    .project{
+      border-left:4px solid var(--secondary);
+    }
+    
+    .project span{
+      background:var(--secondary);
+    }
+    
+    .timeline-stats{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-top:25px;
+    }
+    
+    .stat-box{
+      width:140px;
+      border-radius:15px;
+      padding:15px;
+      transition:.4s ease;
+      background: linear-gradient(135deg, #ff6a00, #ffcc00);
+      color: #fff;
+      font-weight: bold;
+    }
+    
+    .stat-box:hover{
+      transform:scale(1.08);
+      filter:drop-shadow(0 0 8px #ff0000);
+    }
+    
+    .stat-box h3{
+      margin:0;
+      color:#e5ff00;
+    }
+    
+    .stat-box p{
+      margin:4px 0 0 0;
+    }
+    
+    @keyframes floatingCard{
+    
+      0%,100%{
+        transform:translateY(0px);
+      }
+    
+      50%{
+        transform:translateY(-12px);
+      }
+    
+    }
+    
+    @media(max-width:1200px){
+    
+      .month-card{
+        min-width:100%;
+      }
+    
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      text-shadow: 0 0 12px #ff4444;
+    }
+    
+    .close-btn:hover {
+      color: #ff0000;
+    }
+    
+    #zoomedImage {
+      display: block;
+      transform-origin: center;
+      transform: scale(1) translate(0px, 0px);
+      transition: transform 0.2s ease;
+      cursor: grab;
+    }
+    #zoomedImage:active {
+      cursor: grabbing;
+    }
+
+    .footer {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    /* Mobile view: stack vertically with scroll */
+    @media (max-width: 100%) {
+      .modal-grid {
+        grid-template-columns: 1fr; /* single column */
+      }
+    }
+
+    /* ========================================= */
+/* Presentation Slides */
+/* ========================================= */
+
+.presentation-card{
+    width:90%;
+    max-width:1600px;
+    align-items: center;
+
+    min-height:450px;
+
+    padding:40px;
+
+    text-align:left;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,0.10),
+        rgba(255,255,255,0.05)
+    );
+
+    border:1px solid rgba(255,255,255,0.10);
+
+    animation:presentationFloat 6s ease-in-out infinite;
+}
+
+/* Glowing effect */
+
+.presentation-card::before{
+    content:''; 
+    align-items: center;
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,224,255,.15),
+            transparent
+        );
+
+    top:-100px;
+    right:-100px;
+
+    border-radius:50%;
+}
+
+.presentation-card::after{
+    content:'';
+    align-items: center;
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,122,217,.15),
+            transparent
+        );
+
+    bottom:-120px;
+    left:-120px;
+
+    border-radius:50%;
+}
+
+.presentation-card:hover{
+
+    transform:
+        perspective(1000px)
+        rotateX(2deg)
+        rotateY(-2deg)
+        translateY(-10px);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.40);
+
+    filter:
+        drop-shadow(0 0 10px #00e0ff);
+
+    transition:.5s ease;
+}
+
+/* ========================================= */
+/* Slide Title */
+/* ========================================= */
+
+.presentation-card h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00e0ff,
+            #7f6dff,
+            #ff7ad9
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* ========================================= */
+/* Content Grid */
+/* ========================================= */
+
+.slide-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 320px);
+    gap: 25px;
+    margin-top: 25px;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Mobile view: stack cards */
+@media (max-width: 768px) {
+    .slide-grid {
+        grid-template-columns: 1fr; /* single card per row */
+    }
+}
+
+/* ========================================= */
+/* Info Cards */
+/* ========================================= */
+
+.info-box{
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    backdrop-filter:blur(10px);
+
+    transition:.4s ease;
+
+    animation:boxFloat 5s ease-in-out infinite;
+}
+
+.info-box:nth-child(even){
+    animation-delay:1s;
+}
+
+.info-box:nth-child(3n){
+    animation-delay:2s;
+}
+
+.info-box h4{
+
+    color:#00ffd9;
+
+    margin-bottom:12px;
+
+    font-weight:700;
+}
+
+.info-box p{
+
+    line-height:1.7;
+}
+
+.info-box ul{
+
+    padding-left:18px;
+}
+
+.info-box li{
+
+    margin-bottom:8px;
+}
+
+.info-box {
+    background: #111;              /* dark background */
+    color: #00f5ff;                /* neon text */
+    padding: 20px;
+    border-radius: 12px;           /* smooth corners */
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 255, 55, 0.619); /* glowing shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #00f5ff;
+}
+
+/* Hover effect for floating style */
+.info-box:hover {
+    transform:
+        translateY(-8px)
+        scale(1.02);
+    border-color:#00e0ff;
+    filter:
+        drop-shadow(0 0 10px #00e0ff);
+    transform: translateY(-8px);   /* lift upwards */
+    box-shadow: 0 15px 25px rgba(255, 8, 0, 0.97); /* deeper glow */
+}
+
+/*@keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}*/
+
+.info-box {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ========================================= */
+/* Skills Cards */
+/* ========================================= */
+
+.skill-box{
+
+    border-left:5px solid #00ff95;
+}
+
+.skill-box:hover{
+
+    filter:
+        drop-shadow(0 0 10px #00ff95);
+}
+
+/* ========================================= */
+/* Industry Cards */
+/* ========================================= */
+
+.industry-box{
+
+    border-left:5px solid #00e0ff;
+}
+
+.industry-box:hover{
+
+    filter:
+        drop-shadow(0 0 10px #00e0ff);
+}
+
+/* ========================================= */
+/* Challenge Cards */
+/* ========================================= */
+
+.challenge-box{
+
+    border-left:5px solid #ff7a18;
+}
+
+.challenge-box:hover{
+
+    filter:
+        drop-shadow(0 0 10px #ff7a18);
+}
+
+/* ========================================= */
+/* Learning Outcome Cards */
+/* ========================================= */
+
+.learning-box{
+
+    border-left:5px solid #ffe600;
+}
+
+.learning-box:hover{
+
+    filter:
+        drop-shadow(0 0 10px #ffe600);
+}
+
+/* ========================================= */
+/* Large Statistics Cards */
+/* ========================================= */
+
+.big-stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    margin-top:30px;
+}
+
+.big-stat{
+
+    background:
+        rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    transition:.4s ease;
+}
+
+.big-stat:hover{
+
+    transform:
+        scale(1.08);
+
+    filter:
+        drop-shadow(0 0 10px #00ffdd);
+}
+
+.big-stat h3{
+
+    color:#00ffdd;
+
+    margin:0;
+
+    font-size:2rem;
+}
+
+.arrow-list {
+    list-style: none;          /* remove default bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.arrow-list li {
+    position: relative;
+    padding-left: 25px;        /* space for arrow */
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.arrow-list li::before {
+    content: "➜";              /* arrow symbol */
+    position: absolute;
+    left: 0;
+    color: #00f5ff;            /* neon-style color */
+    font-weight: bold;
+}
+
+.arrow-list span {
+  display: block;
+  margin: 6px 0;
+  font-size: 15px;
+  color: #dad6d6;
+  font-weight: 500;
+}
+/* =================================*/
+  </style>
+</head>
+
+
+<body>
+  <div class="header-wrapper">
+    <!-- Unified Mentor Logo -->
+    <img src="UnifiedMentorLogo.jpg" alt="Unified Mentor Logo" class="logo">
+    <h1 class="header-title">Unified Mentor Dashboards Showcase</h1>
+    <p class="header-subtitle">Machine Learning Internship Projects by Prathamesh Bhurke</p>
+    <p class="header-subtitle">From CS Department (2026-27), KC College, HSNC University Roll No: 26KCTYCS07, HSNC Mentor: Ms Shalini Mahesh Gauri, Company Mentor: Sandeep Sai </p>
+  </div>
+
+  <div class="cards">
+
+    <center><div class="card presentation-card">
+
+        <h2 class="card-title">
+            🏢 About Unified Mentor Private Limited
+        </h2>
+
+        <div class="slide-grid">
+
+            <div class="info-box">
+                <h4>🌟 Vision</h4>
+
+                <p>
+                    To be a leading EdTech platform empowering students and
+                    professionals with industry-relevant knowledge, practical
+                    exposure and career-ready skills.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>🚀 Mission</h4>
+
+                <p>
+                    To enhance employability through personalized skill
+                    development programs, internships, mentorship,
+                    certifications and real-world project experience.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>🏛 Organizational Structure</h4>
+
+                <p>
+                    Founder & Leadership Team<br>
+                    ↓<br>
+                    COO & Operations Team<br>
+                    ↓<br>
+                    Domain Mentors<br>
+                    ↓<br>
+                    Internship Coordinators<br>
+                    ↓<br>
+                    Interns & Students
+                </p>
+
+            </div>
+
+            <div class="info-box">
+                <h4>💼 Internship Domains</h4>
+                <ul class="arrow-list">
+                    <li>Machine Learning</li>
+                    <li>Data Science</li>
+                    <li>Data Analyst</li>
+                    <li>Business Analyst</li>
+                    <li>Research Analyst</li>
+                    <li>Web Development</li>
+                    <li>Frontend Development</li>
+                    <li>Full Stack Development</li>
+                    <li>UI / UX</li>
+                    <li>Digital Marketing</li>
+                </ul>
+            </div>
+            
+
+        </div>
+
+    </div></center>
+
+</div>
+
+    <div class="cards">
+
+        <center><div class="card presentation-card">
+    
+            <h2 class="card-title">
+                🎯 Internship Objectives
+            </h2>
+    
+            <div class="slide-grid">
+    
+                <div class="info-box">
+                    <h4>Machine Learning</h4>
+                    <p>
+                        Apply Machine Learning concepts on real-world datasets and projects.
+                    </p>
+                </div>
+    
+                <div class="info-box">
+                    <h4>Analytics</h4>
+                    <p>
+                        Strengthen Data Analytics and Business Intelligence skills.
+                    </p>
+                </div>
+    
+                <div class="info-box">
+                    <h4>Dashboard Development</h4>
+                    <p>
+                        Develop professional Streamlit applications and deployed solutions.
+                    </p>
+                </div>
+    
+                <div class="info-box">
+                    <h4>Professional Growth</h4>
+                    <p>
+                        Gain industry exposure, teamwork and communication experience.
+                    </p>
+                </div>
+    
+            </div>
+    
+        </div></center>
+    
+    </div>
+
+    <div class="cards">
+        <center><div class="card presentation-card">
+    
+            <h2 class="card-title">
+                🛠 Roles & Responsibilities
+            </h2>
+    
+            <div class="slide-grid">
+    
+                <div class="info-box">
+                    Data Cleaning & Preprocessing
+                </div>
+    
+                <div class="info-box">
+                    Exploratory Data Analysis (EDA)
+                </div>
+    
+                <div class="info-box">
+                    Machine Learning Model Understanding
+                </div>
+    
+                <div class="info-box">
+                    Dashboard Design & Development
+                </div>
+    
+                <div class="info-box">
+                    GitHub Repository Management
+                </div>
+    
+                <div class="info-box">
+                    Research Paper Preparation
+                </div>
+    
+                <div class="info-box">
+                    Documentation & Reporting
+                </div>
+    
+                <div class="info-box">
+                    Project Deployment & Testing
+                </div>
+    
+            </div>
+    
+        </div></center>
+    
+    </div>
+    
+    
+
+  <!-- Internship Timeline Dashboard -->
+  <div class="cards">
+  
+    <div class="card timeline-card">
+  
+      <h2 class="card-title">
+        🚀 Machine Learning Internship Journey
+      </h2>
+  
+      <p>
+        A structured 12-week roadmap completed during my Machine Learning Internship
+        at Unified Mentor Private Limited (April - July 2026).
+      </p>
+  
+      <div class="timeline-dashboard">
+  
+        <!-- Month 1 -->
+        <div class="month-card">
+  
+          <div class="month-header month-one">
+            📚 Month 1
+            <span>Weeks 1 - 4 • ML Foundations</span>
+          </div>
+  
+          <div class="week-block">
+            <span>W1</span>
+            Introduction to ML, Supervised & Unsupervised Learning,
+            Linear Regression, Vectors & Matrices
+          </div>
+  
+          <div class="week-block">
+            <span>W2</span>
+            Cost Function, Gradient Descent, Learning Rate,
+            Multivariate Regression
+          </div>
+  
+          <div class="week-block">
+            <span>W3</span>
+            Logistic Regression, Decision Boundaries,
+            Multiclass Classification
+          </div>
+  
+          <div class="week-block">
+            <span>W4</span>
+            Underfitting vs Overfitting,
+            Regularization, Bias & Variance,
+            Error Analysis
+          </div>
+  
+        </div>
+  
+        <!-- Month 2 -->
+        <div class="month-card">
+  
+          <div class="month-header month-two">
+            🧠 Month 2
+            <span>Weeks 5 - 8 • Deep Learning</span>
+          </div>
+  
+          <div class="week-block">
+            <span>W5</span>
+            Neural Networks,
+            Learning Process,
+            Classification,
+            Network Weights
+          </div>
+  
+          <div class="week-block">
+            <span>W6</span>
+            TensorFlow,
+            Activation Functions,
+            Simple Neural Networks,
+            CNN Concepts
+          </div>
+  
+          <div class="week-block">
+            <span>W7</span>
+            Decision Trees,
+            Feature Handling,
+            Random Forest,
+            XGBoost
+          </div>
+  
+          <div class="week-block">
+            <span>W8</span>
+            K-Means Clustering,
+            Cluster Analysis,
+            Anomaly Detection,
+            Metrics
+          </div>
+  
+        </div>
+  
+        <!-- Month 3 -->
+        <div class="month-card">
+  
+          <div class="month-header month-three">
+            🏆 Month 3
+            <span>Weeks 9 - 12 • Industry Projects</span>
+          </div>
+  
+          <div class="week-block project">
+            <span>W9</span>
+            UK Music Market Analysis,
+            EDA,
+            Feature Selection &
+            Dashboard Design
+          </div>
+  
+          <div class="week-block project">
+            <span>W10</span>
+            GitHub Repository,
+            Deployment,
+            Testing,
+            Research Paper Writing
+          </div>
+  
+          <div class="week-block project">
+            <span>W11</span>
+            US Care-Load Analytics,
+            Data Validation,
+            Healthcare Metrics,
+            Recommendations
+          </div>
+  
+          <div class="week-block project">
+            <span>W12</span>
+            Deployment,
+            Testing,
+            Research Writing,
+            Final Submission
+          </div>
+  
+        </div>
+  
+      </div>
+  
+      <hr>
+  
+      <div class="timeline-stats">
+  
+        <div class="stat-box">
+          <h3>12</h3>
+          <p>Weeks</p>
+        </div>
+  
+        <div class="stat-box">
+          <h3>60+</h3>
+          <p>Topics</p>
+        </div>
+  
+        <div class="stat-box">
+          <h3>2</h3>
+          <p>Capstone Projects</p>
+        </div>
+  
+        <div class="stat-box">
+          <h3>3</h3>
+          <p>Credentials</p>
+        </div>
+  
+      </div>
+  
+      <p style="margin-top:20px;">
+        ✨ Learning Foundations → Deep Learning → Real-World Analytics Projects
+      </p>
+  
+    </div>
+  
+  </div>
+
+  <div class="cards">
+    <!-- UK Music Dashboard -->
+    <div class="card">
+      <h2 class="card-title">UK Music Market Dashboard</h2>
+      <img src="UK_Dashboard.png" alt="UK Music Dashboard Screenshot">
+      <p>Interactive analytics of the UK music industry — explore artist diversity, genre trends, and streaming insights.</p>
+      <a href="https://um-unitedkingdommusicmarketanalysisdashboard.streamlit.app/" 
+        target="_blank" class="btn btn-primary">Open UK Dashboard</a><br>
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7462219538391003137?collapsed=1" height="541" width="90%" frameborder="0" 
+        allowfullscreen="" title="Embedded post"></iframe>
+      <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7462219538391003137" 
+        target="_blank" class="btn btn-secondary">View LinkedIn Post</a>
+      <div class="card-embeds">
+        <hr>
+        <h3 class="card-title">Products</h3>
+        <br>
+        <h4 class="card-title1">Spotify Playlist Preview 🎵</h4>
+        
+        <!-- Spotify Playlist Embed -->
+        <iframe data-testid="embed-iframe" 
+                style="border-radius:12px" 
+                src="https://open.spotify.com/embed/playlist/4ar8iua1eZDmraYonUQDC0?utm_source=generator&si=2179ed60bf4146ef" 
+                width="100%" height="352" frameborder="0" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+        </iframe>
+        <p class="playlist-info">
+          🎧 <strong>Spotify version:</strong> ~739 songs • 43 hr 17 min of UK music insights
+        </p>
+        <br>
+        
+        <h4 class="card-title1">YouTube Playlist Preview 🎬</h4>
+      
+        <!-- YouTube Playlist Embed -->
+        <iframe width="100%" height="315" style="border-radius:12px" 
+          src="https://www.youtube-nocookie.com/embed/videoseries?si=Tsp0dkDW_Z0vElWq&amp;list=PLCvr4P68U0Ps" 
+          title="YouTube video player" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+        <p class="playlist-info">
+          📺 <strong>YouTube version:</strong> ~767 video tracks • cinematic UK music experience
+        </p>
+        <!-- YouTube Playlist Button -->
+        <a href="https://youtube.com/playlist?list=PLCvr4P68U0Ps&si=Tsp0dkDW_Z0vElWq" 
+          target="_blank" class="btn btn-danger">
+          🎬 Watch YouTube Playlist
+        </a>
+      </div>
+    </div>
+
+    <!-- US Care-Load Dashboard -->
+    <div class="card">
+      <h2 class="card-title">US CBP–HHS Care-Load Dashboard</h2>
+      <img src="US_Dashboard.png" alt="US Care-Load Dashboard Screenshot">
+      <p>Custody-to-care analytics for CBP–HHS operations — monitor system load, inflow velocity, and forecast alerts.</p>
+      <a href="https://um-ussystemcapacitycareloadanalyticsforunaccompaniedchildren.streamlit.app/" 
+        target="_blank" class="btn btn-primary">Open US Dashboard</a><br>
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7474805161413165056?collapsed=1" height="541" width="90%" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+      <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7474805161413165056" 
+        target="_blank" class="btn btn-secondary">View LinkedIn Post</a>
+    </div>
+  </div>
+
+    <div class="cards">
+
+      <center><div class="card presentation-card">
+    
+        <h2 class="card-title">
+          🚀 Skills Acquired During Internship
+        </h2>
+    
+        <div class="slide-grid">
+    
+          <div class="info-box">
+            <h4>🐍 Programming</h4>
+            <div class="arrow-list">
+              <span>➤ Python</span>
+              <span>➤ Pandas</span>
+              <span>➤ NumPy</span>
+              <span>➤ Streamlit</span>
+              <span>➤ Plotly</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🤖 Machine Learning</h4>
+            <div class="arrow-list">
+              <span>➤ 12 Machine Learning Models</span>
+              <span>➤ Linear Regression</span>
+              <span>➤ Logistic Regression</span>
+              <span>➤ Decision Trees</span>
+              <span>➤ Random Forest</span>
+              <span>➤ XGBoost</span>
+              <span>➤ K-Means</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📊 Advanced Data Science</h4>
+            <div class="arrow-list">
+              <span>➤ EDA</span>
+              <span>➤ Feature Engineering</span>
+              <span>➤ Data Validation</span>
+              <span>➤ Business Analytics</span>
+              <span>➤ Data Storytelling</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🧠 Deep Learning</h4>
+            <div class="arrow-list">
+              <span>➤ TensorFlow</span>
+              <span>➤ Neural Networks</span>
+              <span>➤ Activation Functions</span>
+              <span>➤ CNN Concepts</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📈 Video Creation</h4>
+            <div class="arrow-list">
+              <span>➤ Demonstration Video Format</span>
+              <span>➤ AI Voice Integration</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🎵 Platform Integration</h4>
+            <div class="arrow-list">
+              <span>➤ Spotify Playlist Integration</span>
+              <span>➤ YouTube Playlist Integration</span>
+              <span>➤ Automation In Playlist Creation</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>☁ GitHub</h4>
+            <div class="arrow-list">
+              <span>➤ Version Control</span>
+              <span>➤ Repository Management</span>
+              <span>➤ Deployment</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📑 Research Experience</h4>
+            <div class="arrow-list">
+              <span>➤ Research Paper Writing</span>
+              <span>➤ Research Paper Publishing</span>
+              <span>➤ Technical Documentation</span>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div></center>
+    
+    </div>
+
+    <div class="cards">
+      <center><div class="card presentation-card">
+    
+        <h2 class="card-title">
+          🌍 Industry Experience & Domain Exposure
+        </h2>
+    
+        <div class="slide-grid">
+    
+          <div class="info-box">
+            <h4>🎵 UK Music Market</h4>
+            <div class="arrow-list">
+              <span>➤ Market analytics</span>
+              <span>➤ Artist diversity</span>
+              <span>➤ Genre popularity</span>
+              <span>➤ Streaming trends</span>
+              <span>➤ Dashboard reporting</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🎧 Spotify Platform</h4>
+            <div class="arrow-list">
+              <span>➤ Playlist creation</span>
+              <span>➤ Data-driven music curation</span>
+              <span>➤ Playlist integration</span>
+              <span>➤ Analytics</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📺 YouTube Platform</h4>
+            <div class="arrow-list">
+              <span>➤ Playlist generation</span>
+              <span>➤ Content research</span>
+              <span>➤ Dataset-based categorization</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🏥 US CBP & HHS</h4>
+            <div class="arrow-list">
+              <span>➤ Capacity analytics</span>
+              <span>➤ Care-load forecasting</span>
+              <span>➤ Resource utilization</span>
+              <span>➤ Forecasting models</span>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div></center>
+    
+    </div>
+
+    <div class="cards">
+      <center><div class="card presentation-card">
+    
+        <h2 class="card-title">
+          ⚡ Challenges Faced & Solutions
+        </h2>
+    
+        <div class="slide-grid">
+    
+          <div class="info-box">
+            <h4>📊 3D Interactive Plotly Visualizations</h4>
+            <div class="arrow-list">
+              <span>➤ Challenge: Building advanced interactive 3D plots</span>
+              <span>✅ Solution: Learned Plotly 3D framework & implemented interactive graphs</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📈 Future Prediction till Dec 2027</h4>
+            <div class="arrow-list">
+              <span>➤ Challenge: Forecasting care-load metrics till December 2027</span>
+              <span>✅ Solution: Applied forecasting methods & trend analysis</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📺 YouTube Playlist Creation</h4>
+            <div class="arrow-list">
+              <span>➤ Challenge: Creating playlists directly from datasets</span>
+              <span>✅ Solution: Manually mapped & verified tracks before deployment</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🎧 Spotify Integration</h4>
+            <div class="arrow-list">
+              <span>➤ Challenge: Embedding Spotify playlists into dashboards</span>
+              <span>✅ Solution: Integrated playlist embeds inside Streamlit dashboards</span>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div></center>
+    
+    </div>
+
+    <div class="cards">
+      <center><div class="card presentation-card">
+    
+        <h2 class="card-title">
+          📚 Learning Outcomes
+        </h2>
+    
+        <div class="slide-grid">
+    
+          <div class="info-box">
+            <h4>🎵 Playlist Products Created</h4>
+            <div class="check-list">
+              <span>✔ Atlantic UK Spotify Playlist</span><br>
+              <span>✔ Atlantic UK YouTube Playlist: Baseline Beats in Root Rthym</span><br>
+              <span>✔ Atlantic US Spotify Playlist</span><br>
+              <span>✔ Atlantic US YouTube Playlist: Baseline Beats in Root Pulses</span><br>
+              <span>✔ Pacific South Korea Spotify Playlist</span><br>
+              <span>✔ Atlantic Pacific South Korea: Baseline Beats in Root Eyes YouTube Playlist</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🤖 Practical Machine Learning</h4>
+            <div class="check-list">
+              <span>✔ Applied academic ML concepts on industry datasets</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>📊 Dashboard Development</h4>
+            <div class="check-list">
+              <span>✔ Built interactive Streamlit dashboards with Plotly integrations</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🔬 Research Publication</h4>
+            <div class="check-list">
+              <span>✔ Prepared & published research work based on internship projects</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🏢 Industry Readiness</h4>
+            <div class="check-list">
+              <span>✔ Gained exposure to workflows & reporting standards</span>
+            </div>
+          </div>
+    
+          <div class="info-box">
+            <h4>🚀 Professional Growth</h4>
+            <div class="check-list">
+              <span>✔ Enhanced analytical thinking, communication & problem-solving</span>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div></center>
+    
+    </div>
+    
+    <div class="cards">
+      <center>
+        <div class="card presentation-card">
+    
+          <h2 class="card-title">
+            🏆 Key Achievements & Future Plan
+          </h2>
+    
+          <div class="timeline-stats">
+    
+            <div class="stat-box">
+              <h3>2</h3>
+              <p>Interactive Dashboards Built</p>
+            </div>
+    
+            <div class="stat-box">
+              <h3>6</h3>
+              <p>Music Playlists Engineered</p>
+            </div>
+    
+            <div class="stat-box">
+              <h3>12</h3>
+              <p>Weeks of Internship Journey</p>
+            </div>
+    
+            <div class="stat-box">
+              <h3>3</h3>
+              <p>Professional Credentials Earned</p>
+            </div>
+    
+            <div class="stat-box">
+              <h3>2</h3>
+              <p>Research Papers Published</p>
+            </div>
+    
+            <div class="stat-box">
+              <h3>∞</h3>
+              <p>Exploring Datasets Across The Seven Seas 🌊</p>
+            </div>
+    
+          </div>
+    
+        </div>
+      </center>
+    </div>
+    
+  <!-- Modal for zoomed previews -->
+  <div id="imageModal" class="custom-modal" onclick="outsideClick(event)">
+    <div class="custom-modal-content" onclick="event.stopPropagation()">
+      <div class="custom-modal-header">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="custom-modal-body">
+        <img id="zoomedImage" src="" alt="Welcome to my Dashboard Showcase of Zoomed Proof">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Credentials Section -->
+  <div class="cards">
+    <!-- Offer Letter -->
+    <div class="card">
+      <h2 class="card-title">Internship Offer Letter</h2>
+      <img src="OfferLetter.png" alt="Offer Letter Screenshot" onclick="openModal('OfferLetter.png')">
+      <p>Official internship offer confirming my role at Unified Mentor Private Limited.</p>
+      <center>
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7446140512912334849?collapsed=1" 
+                height="506" width="90%" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+      </center>
+    </div>
+  
+    <!-- Experience Letter (LOR) -->
+    <div class="card">
+      <h2 class="card-title">Experience Letter (LOR)</h2>
+      <img src="LOR.png" alt="Experience Letter Screenshot" onclick="openModal('LOR.png')">
+      <p>Letter of Recommendation highlighting my contributions during the internship.</p>
+      <a href="https://media.licdn.com/dms/image/v2/D4D2DAQGMHNhKk6CQzQ/profile-treasury-image-shrink_800_800/B4DZ9vvS.QKYAM-/0/1784286097539?e=1788958800&v=beta&t=rBm00H1w8fWsIZek0INBmIeUghP85WbZ6n_wQkgsj7Y"
+        target="_blank" class="btn btn-primary">View LOR</a>
+    </div>
+  
+    <!-- Completion Certificate -->
+    <div class="card">
+      <h2 class="card-title">Internship Completion Certificate</h2>
+      <img src="certificate.png" alt="Completion Certificate Screenshot" onclick="openModal('certificate.png')">
+      <p>Verified certificate of successful completion of my Machine Learning Internship.</p>
+      <a href="https://unifiedmentor.com/verify-certificate/UMID03042687228" 
+          target="_blank" class="btn btn-primary">Verify Certificate</a>
+    </div>
+  </div>
+  
+  <script>
+    // Ensure modal is hidden on reload
+  window.onload = function() {
+    document.getElementById("imageModal").style.display = "none";
+    document.getElementById("zoomedImage").src = ""; // clear any leftover image
+  };
+  let scale = 1;
+  let translateX = 0;
+  let translateY = 0;
+  let isDragging = false;
+  let startX, startY;
+  
+  function openModal(imgSrc) {
+    const modal = document.getElementById("imageModal");
+    modal.style.display = "flex"; // inline flex ensures it opens
+    const zoomedImage = document.getElementById("zoomedImage");
+    zoomedImage.src = imgSrc;
+    scale = 1; translateX = 0; translateY = 0;
+    updateTransform();
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById("imageModal");
+    modal.style.display = "none"; // hide again
+    document.getElementById("zoomedImage").src = "";
+  }
+  
+  function outsideClick(event) {
+    const modal = document.getElementById("imageModal");
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+  
+  function updateTransform() {
+    const zoomedImage = document.getElementById("zoomedImage");
+    zoomedImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+  }
+  
+  // Zoom with mouse wheel
+  document.getElementById("zoomedImage").addEventListener("wheel", function(e) {
+    e.preventDefault();
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(0.5, scale), 4);
+    updateTransform();
+  });
+  
+  // Drag-to-pan
+  const zoomedImage = document.getElementById("zoomedImage");
+  
+  zoomedImage.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+  });
+  
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+  
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    translateX += (e.clientX - startX) / scale;
+    translateY += (e.clientY - startY) / scale;
+    startX = e.clientX;
+    startY = e.clientY;
+    updateTransform();
+  });
+  
+  </script>
+  
+  <!-- Footer with LinkedIn Company Profile -->
+  <div class="footer">
+    <p>Created during my internship at Unified Mentor Private Limited</p>
+    <p>Documents evaluated by the Mentor of Unified Mentor Private Limited as per HSNC University</p>
+    <div class="pdf-container">
+      <iframe src="https://drive.google.com/file/d/1PFUiAsVtJVkr-2jTtqbH5kGWcOaAG-lL/preview" 
+        width="60%" height="600" style="border:none;" allow="autoplay">
+      </iframe>
+    </div>
+    <a href="https://www.linkedin.com/company/unified-mentor-pvt-ltd/" 
+        target="_blank" class="btn btn-linkedin">Visit Unified Mentor Private Limited LinkedIn</a>
+    <a href="https://www.linkedin.com/company/unifiedmentor/" 
+        target="_blank" class="btn btn-linkedin">Visit Unified Mentor LinkedIn</a>
+    <a href="https://1drv.ms/p/c/7a47b8aa4a71fada/IQAXgUrFV4wXSZyND7eVnCUdAcTGrLzkqrRUWbQzWzaRtHs?e=0MnLPI" 
+        target="_blank" class="btn btn-linkedin">Presentation LINK</a>
+  </div>
+
+    <div class="cards">
+
+        <center><div class="card presentation-card">
+    
+            <div style="
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                align-items:center;
+                min-height:550px;
+                text-align:center;
+            ">
+    
+                <h2 class="card-title">
+                    🙏 Acknowledgement
+                </h2>
+    
+                <p style="
+                    max-width:900px;
+                    font-size:1.1rem;
+                    line-height:1.9;
+                    margin-top:20px;
+                ">
+    
+                    I sincerely express my gratitude to
+                    <strong>Unified Mentor Private Limited</strong>
+                    for providing me with the opportunity to undertake this
+                    Machine Learning Internship and gain valuable industry experience.
+    
+                    <br><br>
+    
+                    I am thankful to my mentors, reviewers and internship coordinators
+                    for their continuous guidance, constructive feedback and support
+                    throughout the internship journey.
+    
+                    <br><br>
+    
+                    I also extend my gratitude to the faculty members of
+                    <strong>KC College, HSNC University</strong>
+                    for their encouragement and academic guidance.
+    
+                    <br><br>
+    
+                    The knowledge, industry exposure and practical experience gained
+                    during this internship have significantly strengthened my
+                    technical skills and professional confidence.
+    
+                </p>
+    
+                <div style="
+                    width:80%;
+                    height:2px;
+                    background:linear-gradient(
+                        90deg,
+                        transparent,
+                        #00e0ff,
+                        #ff7ad9,
+                        transparent
+                    );
+                    margin:30px 0;
+                "></div>
+    
+                <h1 class="header-title">
+                    🎉 THANK YOU
+                </h1>
+    
+                <h3 style="
+                    margin-top:20px;
+                    color:#ffffff;
+                ">
+                    Machine Learning Internship Presentation
+                </h3>
+    
+                <h4 style="
+                    margin-top:10px;
+                    color:#00ffd9;
+                ">
+                    By Prathamesh Bhurke
+                </h4>
+    
+                <div style="
+                    margin-top:40px;
+                    padding:20px 50px;
+                    border-radius:25px;
+                    background:rgba(255,255,255,0.08);
+                    border:1px solid rgba(255,255,255,0.15);
+                    animation:floatingCard 3s ease-in-out infinite;
+                ">
+    
+                    <h2 style="
+                        color:#00ffd9;
+                        margin:0;
+                        font-weight:700;
+                    ">
+                        ❓ Any Questions?
+                    </h2>
+    
+                </div>
+    
+            </div>
+    
+        </div></center>
+    
+    </div>
+</body>
+</html>
