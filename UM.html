@@ -18,7 +18,9 @@
       --shadow-2: 0 30px 60px rgba(0,0,0,0.45);
     }
 
-    body {
+    html, body {
+      min-width: 600px;
+      max-width: 100%;
       margin: 0;
       font-family: Inter, system-ui, sans-serif;
       color: var(--text);
@@ -349,11 +351,11 @@
     /* ========================================= */
     
     .presentation-card{
+        display: flex; min-width: 520px;
         width:90%;
         align-items: center;
         min-height:450px;
         padding:40px;
-        text-align:left;
         position:relative;
         overflow:inherit;
         background:linear-gradient(
@@ -440,19 +442,37 @@
     
     .slide-grid {
         display: grid;
-        grid-template-columns: repeat(4, 320px);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 25px;
         margin-top: 25px;
         justify-content: center;
         text-align: center;
+        max-width: 1280px; /* ensures max 4 cards per row */
     }
-    
-    /* Mobile view: stack cards */
-    @media (max-width: 768px) {
-        .slide-grid {
-            grid-template-columns: 1fr; /* single card per row */
+    .slide-grids {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(470px, 1fr));
+        gap: 25px;
+        margin-top: 25px;
+        justify-content: center;
+        text-align: center;
+        max-width: 1280px; /* ensures max 4 cards per row */
+    }
+  
+    /* 2 cards per row */
+    @media (max-width: 1380px) {
+        .slide-grid, .slide-grids {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
+    
+    /* 1 card per row */
+    @media (max-width: 600px) {
+        .slide-grid, .slide-grids {
+            grid-template-columns: 1fr;
+        }
+    }
+    
     
     /* ========================================= */
     /* Info Cards */
@@ -1269,7 +1289,7 @@
           📚 Learning Outcomes
         </h2>
     
-        <div class="slide-grid" style="grid-template-columns: repeat(3, 320px);">
+        <div class="slide-grids">
     
           <div class="info-box">
             <h4>🎵 Playlist Products Created</h4>
