@@ -123,13 +123,14 @@
     .custom-modal {
       position: fixed;
       inset: 0;
-      z-index: 9999;
+      z-index: 1;
       background: rgba(0,0,0,0.45);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       justify-content: center;
       align-items: center;
       max-height: fit-content;
+      overflow:auto;
     }
     
     .custom-modal-content {
@@ -317,10 +318,11 @@
       color: #fff;
       cursor: pointer;
       text-shadow: 0 0 12px #ff4444;
+      z-index: 50;
     }
     
     .close-btn:hover {
-      color: #ff0000;
+      color: #ff0000; z-index: 100;
     }
     
     #zoomedImage {
@@ -844,8 +846,6 @@
         </div></center>
     
     </div>
-    
-    
 
   <!-- Internship Timeline Dashboard -->
   <div class="cards">
@@ -1461,8 +1461,6 @@
       <h2 class="card-title">Experience Letter (LOR)</h2>
       <img src="LOR.png" alt="Experience Letter Screenshot" onclick="openModal('LOR.png')">
       <p>Letter of Recommendation highlighting my contributions during the internship.</p>
-      <a href="https://media.licdn.com/dms/image/v2/D4D2DAQGMHNhKk6CQzQ/profile-treasury-image-shrink_800_800/B4DZ9vvS.QKYAM-/0/1784286097539?e=1788958800&v=beta&t=rBm00H1w8fWsIZek0INBmIeUghP85WbZ6n_wQkgsj7Y"
-        target="_blank" class="btn btn-primary">View LOR</a>
     </div>
   
     <!-- Completion Certificate -->
@@ -1522,9 +1520,33 @@
     updateTransform();
   });
   
-  // Drag-to-pan
-  const zoomedImage = document.getElementById("zoomedImage");
+  zoomedImage.addEventListener("touchstart", function(e) {
+    if (e.touches.length === 2) {
+      // Two fingers → start pinch
+      const dx = e.touches[0].pageX - e.touches[1].pageX;
+      const dy = e.touches[0].pageY - e.touches[1].pageY;
+      startDistance = Math.sqrt(dx * dx + dy * dy);
+    }
+  }, { passive: false });
   
+  zoomedImage.addEventListener("touchmove", function(e) {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const dx = e.touches[0].pageX - e.touches[1].pageX;
+      const dy = e.touches[0].pageY - e.touches[1].pageY;
+      const newDistance = Math.sqrt(dx * dx + dy * dy);
+  
+      // Adjust scale based on pinch distance
+      const delta = newDistance / startDistance;
+      scale *= delta;
+      scale = Math.min(Math.max(0.5, scale), 4);
+      startDistance = newDistance;
+  
+      updateTransform();
+    }
+  }, { passive: false });
+  
+  // Drag-to-pan with mouse
   zoomedImage.addEventListener("mousedown", (e) => {
     isDragging = true;
     startX = e.clientX;
@@ -1544,6 +1566,31 @@
     startY = e.clientY;
     updateTransform();
   });
+  
+  // Drag-to-pan with touch (single finger)
+  zoomedImage.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }
+  }, { passive: false });
+  
+  zoomedImage.addEventListener("touchend", () => {
+    isDragging = false;
+  }, { passive: false });
+  
+  zoomedImage.addEventListener("touchmove", (e) => {
+    if (isDragging && e.touches.length === 1) {
+      e.preventDefault();
+      translateX += (e.touches[0].clientX - startX) / scale;
+      translateY += (e.touches[0].clientY - startY) / scale;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      updateTransform();
+    }
+  }, { passive: false });
+  
   
   </script>
   
